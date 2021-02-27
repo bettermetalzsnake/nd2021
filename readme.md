@@ -2,9 +2,16 @@
 
 1. Clone this repo to your local directory.
 2. You will need to have an Azure account, Azure CLI, Packer and Terraform installed.
-3. Replace the * *Tenant ID, Subscription ID and any other Azure related accounts as needed.* *
-4. Update the server.json as needed with the items you want Packer to install before it creates your image.
-5. Update the Terraform main.tf using your variables, Azure CIDR range and any other items as necessary.  
+
+
+# Packer Instructions #
+1. Replace the Azure items as listed * *Tenant ID, Subscription ID, resource group and any other accounts as needed.* *
+2. Update the server.json as needed with the items you want Packer to install before it creates your image. Specifically the builders section is where you need to add these items.
+
+
+# Terraform #
+1. Update the Terraform main.tf using your variables as needed, Azure CIDR range and any other items as necessary.
+2. The ###vars.tf### file can be change to add variables before the build. Following the format you can create variables that will be passed to the ###maint.tf###.
 
 
 # Other Links #

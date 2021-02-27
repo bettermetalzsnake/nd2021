@@ -13,6 +13,9 @@
 1. Update the Terraform main.tf using your variables as needed, Azure CIDR range and any other items as necessary.
 2. The **vars.tf** file can be change to add variables before the build. Following the format you can create variables that will be passed to the **maint.tf**.
 
+example: variable "input" {
+  description = "This will create a variable called input and can be passed to the main.tf"
+
 
 # Other Links #
 These links will assist you with using the DevOps tools used in this build.

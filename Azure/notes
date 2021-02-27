@@ -1,0 +1,1 @@
+az policy definition create --name 'tagging_policy' --display-name 'Deny Resource creation without tags ' --description 'This policy denys any resource creation which don't hve tags.' --rules tagging_policy.json

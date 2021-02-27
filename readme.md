@@ -15,6 +15,7 @@
 
 example: variable "input" {
   description = "This will create a variable called input and can be passed to the main.tf"
+}
 
 
 # Other Links #

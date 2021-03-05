@@ -23,6 +23,13 @@ data "azurerm_image" "search" {
 resource "azurerm_resource_group" "rg" {
   name     = "${var.prefix}-resource-group"
   location            = var.location
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
 }
 
 resource "azurerm_virtual_network" "vnet" {
@@ -30,6 +37,15 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
+
 }
 
 resource "azurerm_subnet" "subnet" {
@@ -37,6 +53,16 @@ resource "azurerm_subnet" "subnet" {
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.2.0/24"]
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
+
+
+
 }
 
 resource "azurerm_public_ip" "pubip" {
@@ -44,6 +70,16 @@ resource "azurerm_public_ip" "pubip" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
+
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
+
+
 }
 
 resource "azurerm_lb" "lb" {
@@ -55,6 +91,16 @@ resource "azurerm_lb" "lb" {
     name                 = "primary"
     public_ip_address_id = azurerm_public_ip.pubip.id
   }
+
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
+
+
 }
 
 resource "azurerm_lb_backend_address_pool" "back_address_pool" {
@@ -62,6 +108,15 @@ resource "azurerm_lb_backend_address_pool" "back_address_pool" {
   resource_group_name = azurerm_resource_group.rg.name
   loadbalancer_id     = azurerm_lb.lb.id
   
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
+
+
 }
 
 resource "azurerm_network_interface" "nic" {
@@ -74,12 +129,31 @@ resource "azurerm_network_interface" "nic" {
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
   }
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
+
+
+
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "nic_address_pool" {
   network_interface_id    = azurerm_network_interface.nic.id
   ip_configuration_name   = "${var.prefix}-ip-config"
   backend_address_pool_id = azurerm_lb_backend_address_pool.back_address_pool.id
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
+
+
 }
 
 
@@ -127,12 +201,30 @@ resource "azurerm_network_security_group" "security_group" {
       destination_address_prefix  = "VirtualNetwork"
 
       }
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
+
+
 }  
 
 resource "azurerm_availability_set" "avset" {
   name                = "${var.prefix}-availset"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
+
 
 }
 
@@ -169,4 +261,15 @@ network_interface {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
+
+
+
+tags = merge (
+    local.common_tags,
+    map(
+      "owner", var.owner
+    )
+  )
+
+
 }

@@ -21,3 +21,14 @@ variable "password" {
   type = string
   description = "The password for the VM"
 }
+
+
+variable "owner" {}
+
+locals {
+  common_tags = {
+    Environment = "Production"
+    CreatedBy = "Terraform"
+    "Project Name" = var.prefix
+  }
+}

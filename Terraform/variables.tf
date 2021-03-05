@@ -5,11 +5,13 @@ variable "prefix" {
 variable "location" {
   type = string
   description = "The Azure Region in which all resources in this example should be created."
+  default = westus2
 }
 
 variable "scalenum" {
   type = number
   description = "How many VMs would you like to deploy"
+  default = 1
 }
 
 variable "username" {

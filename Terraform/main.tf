@@ -53,16 +53,6 @@ resource "azurerm_subnet" "subnet" {
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.2.0/24"]
-
-tags = merge (
-    local.common_tags,
-    map(
-      "owner", var.owner
-    )
-  )
-
-
-
 }
 
 resource "azurerm_public_ip" "pubip" {
@@ -129,16 +119,6 @@ resource "azurerm_network_interface" "nic" {
     subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
   }
-
-tags = merge (
-    local.common_tags,
-    map(
-      "owner", var.owner
-    )
-  )
-
-
-
 }
 
 resource "azurerm_network_interface_backend_address_pool_association" "nic_address_pool" {

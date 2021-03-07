@@ -1,5 +1,11 @@
 # Deploy an image to Azure Cloud using Packer and Terraform #
 
+
+# Overview #
+This project will assist you with deploying a Packer image that you create and then use Terraform to deploy it to Azure Cloud.
+
+Here are the preliminary steps you should perform:
+
 1. Clone this repo to your local directory.
 2. You will need to have an Azure account, Azure CLI, Packer and Terraform installed.
 
@@ -7,6 +13,7 @@
 # Packer Instructions #
 1. Replace the Azure items as listed **Tenant ID, Subscription ID, resource group and any other accounts as needed.**
 2. Update the server.json as needed with the items you want Packer to install before it creates your image. Specifically the builders section is where you need to add these items.
+3. When you are ready to deploy your image run the command ```packer build server.json``` and this will kickoff the build. 
 
 
 # Terraform #

@@ -24,6 +24,8 @@ example: variable "input" {
   description = "This will create a variable called input and can be passed to the main.tf"
 }
 
+3. When you are done with editing both the **vars.tf** and the **main.tf** you can run the ```terraform plan``` and it will prompt you for options to set and pass them in. When this is complete run the ```terraform apply``` command and terraform will create the resources.
+
 
 # Other Links #
 These links will assist you with using the DevOps tools used in this build.

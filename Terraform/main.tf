@@ -97,17 +97,7 @@ resource "azurerm_lb_backend_address_pool" "back_address_pool" {
   name                = "${var.prefix}-backend-address-pool"
   resource_group_name = azurerm_resource_group.rg.name
   loadbalancer_id     = azurerm_lb.lb.id
-  
-
-tags = merge (
-    local.common_tags,
-    map(
-      "owner", var.owner
-    )
-  )
-
-
-}
+  }
 
 resource "azurerm_network_interface" "nic" {
   name                = "${var.prefix}-nic"
@@ -125,15 +115,6 @@ resource "azurerm_network_interface_backend_address_pool_association" "nic_addre
   network_interface_id    = azurerm_network_interface.nic.id
   ip_configuration_name   = "${var.prefix}-ip-config"
   backend_address_pool_id = azurerm_lb_backend_address_pool.back_address_pool.id
-
-tags = merge (
-    local.common_tags,
-    map(
-      "owner", var.owner
-    )
-  )
-
-
 }
 
 
